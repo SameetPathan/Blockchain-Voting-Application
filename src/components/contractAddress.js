@@ -323,7 +323,7 @@ export const BalanceContractABI = [
   ];
 export const BalanceContractAddress = "0x97BcA06C815AE57beeeEe96953c6944ea4EDd356";
 
-export const VoterContractAddress = "0x1741d38E38BD649eB784A27AA6962c6816146a3C";
+export const VoterContractAddress = "0x2b0768adEAF60a2651b1DAa03F5F8717250A5fbe";
 export const VoterABi =[
 	{
 		"constant": false,

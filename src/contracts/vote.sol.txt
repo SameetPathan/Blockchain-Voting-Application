@@ -126,12 +126,29 @@ contract Contest {
     }
 
     function resetContest() public onlyAdmin {
-        contestantsCount = 0;
-        for (uint256 i = 1; i <= contestantsCount; i++) {
-            delete voters[address(i)];
-        }
-        state = PHASE.reg;
+    // Reset contestants
+    for (uint256 i = 1; i <= contestantsCount; i++) {
+        delete contestants[i];
     }
+    contestantsCount = 0;
+
+    // Reset voters
+    address[] memory voterAddresses = new address[](contestantsCount);
+    uint256 numVoters = 0;
+    for (uint256 i = 1; i <= contestantsCount; i++) {
+        if (voters[address(i)].isRegistered) {
+            delete voters[address(i)];
+            voterAddresses[numVoters] = address(i);
+            numVoters++;
+        }
+    }
+    for (uint256 i = 0; i < numVoters; i++) {
+        delete voters[voterAddresses[i]];
+    }
+
+    // Reset state
+    state = PHASE.reg;
+}
 
     function getCurrentState() public view returns (PHASE) {
         return state;
